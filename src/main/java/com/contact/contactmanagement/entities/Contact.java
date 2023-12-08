@@ -33,7 +33,6 @@ public class Contact {
 
     private String vatNumber;
 
-    @Enumerated(EnumType.STRING)
     private ContactStatus status;
 
     @JsonIgnore

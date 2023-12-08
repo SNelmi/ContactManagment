@@ -10,11 +10,13 @@ import com.contact.contactmanagement.services.ContactService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 @AllArgsConstructor
 public class CompanyServiceImpl implements CompanyService {
 
