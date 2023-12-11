@@ -1,14 +1,13 @@
 package com.contact.contactmanagement.exceptions;
 
+import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
+@Getter
 public class CompanyException extends RuntimeException{
 
-    private HttpStatus status;
+    private final HttpStatus status;
 
-    public CompanyException(String message) {
-        super(message);
-    }
 
     public CompanyException(HttpStatus status, String message) {
         super(message);
@@ -19,7 +18,4 @@ public class CompanyException extends RuntimeException{
         return status.value() + ":".concat(getMessage());
     }
 
-    public HttpStatus getStatus() {
-        return status;
-    }
 }

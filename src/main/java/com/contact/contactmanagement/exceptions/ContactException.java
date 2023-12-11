@@ -1,14 +1,12 @@
 package com.contact.contactmanagement.exceptions;
 
+import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
+@Getter
 public class ContactException extends RuntimeException{
 
-    private HttpStatus status;
-
-    public ContactException(String message) {
-        super(message);
-    }
+    private final HttpStatus status;
 
     public ContactException(HttpStatus status, String message) {
         super(message);
@@ -19,7 +17,4 @@ public class ContactException extends RuntimeException{
         return status.value() + ":".concat(getMessage());
     }
 
-    public HttpStatus getStatus() {
-        return status;
-    }
 }

@@ -3,7 +3,6 @@ package com.contact.contactmanagement.services.impl;
 import com.contact.contactmanagement.entities.Company;
 import com.contact.contactmanagement.entities.Contact;
 import com.contact.contactmanagement.exceptions.CompanyException;
-import com.contact.contactmanagement.exceptions.ContactException;
 import com.contact.contactmanagement.repositories.CompanyRepository;
 import com.contact.contactmanagement.services.CompanyService;
 import com.contact.contactmanagement.services.ContactService;
