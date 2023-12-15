@@ -30,10 +30,14 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public Contact saveContact(Contact contact) {
+        checkStatus(contact);
+        return contactRepository.save(contact);
+    }
+
+    private static void checkStatus(Contact contact) {
         if(contact.getStatus().equals(ContactStatus.FREELANCER) && StringUtils.isBlank(contact.getVatNumber())){
             throw new ContactException(HttpStatus.UNPROCESSABLE_ENTITY, "Vat number is required  ");
         }
-        return contactRepository.save(contact);
     }
 
     @Override
@@ -53,6 +57,8 @@ public class ContactServiceImpl implements ContactService {
             updateContact.setLastName(contact.getLastName());
             updateContact.setAddress(contact.getAddress());
             updateContact.setStatus(contact.getStatus());
+            updateContact.setVatNumber(contact.getVatNumber());
+            checkStatus(updateContact);
             contactRepository.save(updateContact);
             return updateContact;
         } else throw new ContactException(HttpStatus.NOT_FOUND, UNABLE_TO_FIND_CONTACT_WITH_ID + id);

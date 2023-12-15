@@ -1,6 +1,7 @@
 package com.contact.contactmanagement.controller;
 
 import com.contact.contactmanagement.entities.Company;
+import com.contact.contactmanagement.entities.Contact;
 import com.contact.contactmanagement.services.CompanyService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping(path = "/companies")
@@ -22,7 +24,6 @@ public class CompanyController {
         return new ResponseEntity<>(companyService.getAllCompanies(), HttpStatus.OK) ;
     }
 
-    //@ResponseStatus()
     @PostMapping()
     public ResponseEntity<Company> createCompany(@RequestBody @Validated Company company) {
         Company savedCompany = companyService.saveCompany(company);
@@ -45,6 +46,12 @@ public class CompanyController {
     public ResponseEntity<Void> addContactToCompany(@PathVariable Long companyId, @PathVariable Long contactId){
         companyService.addContactToCompany(companyId, contactId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping(path = "/{id}/contacts")
+    public ResponseEntity<Set<Contact>> getCompanyByVATNumber(@PathVariable Long id) {
+        var companyContacts = companyService.getCompanyContacts(id);
+        return new ResponseEntity<>(companyContacts, HttpStatus.OK);
     }
 
 }

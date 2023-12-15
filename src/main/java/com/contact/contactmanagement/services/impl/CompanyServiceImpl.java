@@ -11,8 +11,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -58,9 +60,14 @@ public class CompanyServiceImpl implements CompanyService {
         Contact existingContact = contactService.getContactById(contactId);
         if(existingCompany.isPresent()){
             Company updateCompany = existingCompany.get();
-            updateCompany.getContacts().add(existingContact);
+            updateCompany.addContact(existingContact);
             companyRepository.save(updateCompany);
         }else throw new CompanyException(HttpStatus.BAD_REQUEST, "Cannot add contact to company, unable to find company with id: " + companyId);
 
+    }
+
+    @Override
+    public Set<Contact> getCompanyContacts(Long id) {
+        return companyRepository.findCompanyContacts(id);
     }
 }

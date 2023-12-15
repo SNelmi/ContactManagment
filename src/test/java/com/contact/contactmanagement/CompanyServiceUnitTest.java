@@ -105,7 +105,7 @@ class CompanyServiceUnitTest {
         Long companyId = 1L;
         Company company = Company.builder().address("Charleroi").vatNumber("VAT123789").contacts(new HashSet<>()).build();
         Long contactId = 1L;
-        Contact contact = Contact.builder().firstName("John").lastName("Dohe").address("Charleroi").vatNumber("TV456").status(ContactStatus.FREELANCER).build();
+        Contact contact = Contact.builder().firstName("John").lastName("Dohe").address("Charleroi").vatNumber("TV456").status(ContactStatus.FREELANCER).companies(new HashSet<>()).build();
         //when
         Mockito.when(companyRepository.findById(any(Long.class))).thenReturn(Optional.ofNullable(company));
         Mockito.when(companyRepository.save(any(Company.class))).thenReturn(company);

@@ -24,6 +24,14 @@ public class Company {
     private String address;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "companies")
+    @ManyToMany(mappedBy = "companies", cascade = CascadeType.MERGE)
     private Set<Contact> contacts = new HashSet<>();
+
+    public void addContact(Contact c){
+        if(this.contacts.isEmpty()){
+            this.contacts = new HashSet<>();
+        }
+        this.contacts.add(c);
+        c.addCompany(this);
+    }
 }

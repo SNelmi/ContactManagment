@@ -4,7 +4,6 @@ import com.contact.contactmanagement.enums.ContactStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.HashSet;
@@ -33,6 +32,7 @@ public class Contact {
 
     private String vatNumber;
 
+    @Enumerated(EnumType.STRING)
     private ContactStatus status;
 
     @JsonIgnore
@@ -43,4 +43,12 @@ public class Contact {
             inverseJoinColumns = @JoinColumn(name = "company_id")
     )
     private Set<Company> companies = new HashSet<>();
+
+    public void addCompany(Company c){
+        if(this.companies.isEmpty()){
+            this.companies = new HashSet<>();
+        }
+        this.companies.add(c);
+    }
+
 }
